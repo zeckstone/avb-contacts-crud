@@ -73,6 +73,49 @@ const deleteContact = async (id) => {
     }
 };
 
+const deleteEmail = async (payload) => {
+    try {
+      await client.connect();
+  
+      const db = client.db(dbConfig.dbName);
+      const collection = db.collection(dbConfig.collectionName);
+      const contact = await collection.find({ _id: payload.id }).toArray();
+
+      const contactEmails = contact[0].emails;
+      const emailToDeleteIndex = contactEmails.indexOf(payload.email);
+      const updatedEmailList = contactEmails.splice(emailToDeleteIndex, 1);
+
+      const response = await collection.updateOne({ _id: payload.id }, { $set: { emails: updatedEmailList } });
+      
+      return response;
+    } catch (err) {
+      return new Error(err.message);
+    } finally {
+      await client.close();
+    }
+};
+
+const addEmail = async (payload) => {
+    try {
+      await client.connect();
+  
+      const db = client.db(dbConfig.dbName);
+      const collection = db.collection(dbConfig.collectionName);
+      const contact = await collection.find({ _id: payload.id }).toArray();
+
+      const contactEmails = contact[0].emails;
+      const updatedEmailList = contactEmails.push(payload.email);
+      
+      const response = await collection.updateOne({ _id: payload.id }, { $set: { emails: updatedEmailList } });
+      
+      return response;
+    } catch (err) {
+      return new Error(err.message);
+    } finally {
+      await client.close();
+    }
+};
+
 const updateName = async (payload) => {
     try {
       await client.connect();
@@ -114,6 +157,16 @@ const manipulateCollection = async (actionObject) => {
         case contactDataActions.UPDATE_NAME:
             {
                 result = await updateName(actionObject.payload)
+                return result;
+            };
+        case contactDataActions.ADD_EMAIL:
+            {
+                result = await addEmail(actionObject.payload);
+                return result;
+            };
+        case contactDataActions.DELETE_EMAIL:
+            {
+                result = await deleteEmail(actionObject.payload);
                 return result;
             };
         default:

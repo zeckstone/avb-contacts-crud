@@ -4,12 +4,13 @@ const router = Router();
 
 router.get('/contacts/:contactId', async (req, res) => {
     const { contactId } = req.params;
+    const { contactInfo } = req.body;
 
     const response = await manipulateCollection({
-        type: 'UPDATE_NAME',
+        type: contactInfo.type,
         payload: {
-            id: contactId,
-            firstName: 'Nyamekye'
+            contactInfo,
+            contactId
         }
     });
     
