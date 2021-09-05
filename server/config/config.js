@@ -10,7 +10,6 @@ const serverURLEndPoints = {
     deleteContact: './api-routes/delete-contact',
     getContact: './api-routes/get-contact',
     updateContact: './api-routes/update-contact',
-    updateEmail: './api-routes/update-email'
 };
 
 const contactDataActions = {
