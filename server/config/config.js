@@ -13,7 +13,17 @@ const serverURLEndPoints = {
     updateEmail: './api-routes/update-email'
 };
 
+const contactDataActions = {
+    GET_ALL_CONTACTS: 'GET_ALL_CONTACTS',
+    GET_CONTACT: 'GET_CONTACT',
+    CREATE_CONTACT: 'CREATE_CONTACT',
+    DELETE_CONTACT: 'DELETE_CONTACT',
+    UPDATE_EMAIL: 'UPDATE_EMAIL',
+    UPDATE_NAME: 'UPDATE_NAME'
+}
+
 module.exports = {
+    contactDataActions,
     dbConfig,
     serverURLEndPoints
 };

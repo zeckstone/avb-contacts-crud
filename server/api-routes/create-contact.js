@@ -5,8 +5,8 @@ const router = Router();
 
 router.get('/', async (req, res) => {
     const response = await createContact({
-        id: v4(),
-        firstName: 'Selasi',
+        _id: v4(),
+        firstName: 'Aria',
         lastName: 'Afriyie',
         emails: ['test@gmail.com', 'test2@gmail.com']
     });
