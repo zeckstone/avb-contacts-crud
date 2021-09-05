@@ -1,7 +1,6 @@
 const { MongoClient } = require("mongodb");
-const { contactDataActions, dbConfig } = require('../config/config');
 const { v4 } = require('uuid');
-const first = require("ee-first");
+const { contactDataActions, dbConfig } = require('../config/config');
 
 const client = new MongoClient(dbConfig.uri);
 
@@ -107,16 +106,6 @@ const manipulateCollection = async (actionObject) => {
     let result;
 
     switch (actionObject.type) {
-        case contactDataActions.GET_ALL_CONTACTS:
-            {
-               result = await getPaginatedContacts();
-               return result;
-            };
-        case contactDataActions.CREATE_CONTACT:
-            {
-                result = await createContact(actionObject.payload);
-                return result;
-            };
         case contactDataActions.DELETE_CONTACT:
             {
                 result = await deleteContact(actionObject.payload.id);
@@ -136,5 +125,8 @@ const manipulateCollection = async (actionObject) => {
 };
 
 module.exports = {
+    createContact,
+    getContact,
+    getPaginatedContacts,
     manipulateCollection
 };

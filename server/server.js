@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 app.use('/contacts/paginated', require(serverURLEndPoints.paginatedContacts));
 // app.use('/', require(serverURLEndPoints.getContact));
-// app.use('/contacts', require(serverURLEndPoints.createContact));
+app.use('/', require(serverURLEndPoints.createContact));
 // app.use('/', require(serverURLEndPoints.deleteContact));
 app.use('/', require(serverURLEndPoints.updateContact));
 // app.use('/', require(serverURLEndPoints.updateEmail));
