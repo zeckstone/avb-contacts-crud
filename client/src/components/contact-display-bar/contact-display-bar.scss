@@ -1,0 +1,58 @@
+.contact-display-bar {
+    position: absolute;
+    width: 228px;
+    height: 768px;
+    left: 0px;
+    top: 0px;
+    
+    background: #F8FAFF;
+
+    .heading {
+        position: absolute;
+        width: 141px;
+        height: 43px;
+        left: 17px;
+        top: 14px;
+        display: flex;
+        flex-direction: row;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 36px;
+        line-height: 43px;
+
+        color: #000000;
+    }
+
+    .contact-item {
+        height: 35px;
+        width: 157px;
+        margin-left: 20px;
+    }
+
+    .contact-item-container {
+        width: 228px;
+
+        &:hover {
+            background: #579AFF;
+            color: #FFFFFF;
+        }
+    }
+}
+
+.contact-display-container {
+    position: absolute;
+    // width: 157px;
+    height: 668px;
+    // left: 20px;
+    top: 77px;
+    
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    
+    color: #444444;
+}

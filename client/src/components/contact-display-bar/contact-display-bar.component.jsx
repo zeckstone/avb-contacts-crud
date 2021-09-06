@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './contact-display-bar.scss';
 import ContactItem from '../contact-item/contact-item.component';
 import { mockData } from '../../mockData/mockData';
+import AddItemButton from '../custom-buttons/add-item-button/add-item-button.component';
 
 const ContactDisplayBar = () => {
     const [contacts, setContacts] = useState({ currentContact: '', contacts: mockData })
@@ -11,7 +12,7 @@ const ContactDisplayBar = () => {
    
     return (
         <div className='contact-display-bar' >
-            <h1 className='heading'>Contacts</h1>
+            <div className='heading'>Contacts <AddItemButton name='contacts-add-item' /></div>
             <div className='contact-display-container'>
                 {
                     contacts.contacts.map(contact => 

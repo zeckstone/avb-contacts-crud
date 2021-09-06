@@ -1,0 +1,53 @@
+.first-name-input {
+    left: 261px;
+    top: 98px;
+}
+
+.last-name-input {
+    left: 645px;
+    top: 97px;
+}
+
+.custom-input {
+    position: absolute;
+    width: 345px;
+    background: #F9FBFF;
+    height: 36px;
+    background: #F9FBFF;
+    border: 1px solid #D7E7FF;
+    box-sizing: border-box;
+}
+
+.first-name-label {
+    width: 58px;
+    height: 14px;
+    left: 261px;
+    top: 77px;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+
+    color: #555555;
+}
+
+.last-name-label {
+    width: 56px;
+    height: 14px;
+    left: 645px;
+    top: 77px;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+
+    color: #555555;
+}
+
+.custom-input-label {
+    position: absolute;
+}

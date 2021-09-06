@@ -1,0 +1,41 @@
+.delete-button {
+    left: 261px;
+    top: 701px;
+    
+    background: #FF5757;
+    color: #FFFFFF;
+    border: 1px solid #FF5757;
+}
+
+.cancel-button {
+    left: 724px;
+    top: 701px;
+    
+    background: #F9FBFF;
+    border: 1px solid #579AFF;
+    box-sizing: border-box;
+}
+
+.save-button {
+    left: 874px;
+    top: 701px;
+    
+    background: #579AFF;
+    border: 1px solid #579AFF;
+    box-sizing: border-box;
+    color: #FFFFFF;
+}
+
+.custom-button {
+    position: absolute;
+    width: 120px;
+    height: 45px;
+    bottom: 20%;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+}
