@@ -1,5 +1,6 @@
 import React, { useEffect, useState, memo } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 // import { getAllContacts } from '../../redux/actions/creators/creators';
 // import { allContacts } from '../../redux/selectors/selectors';
 import './homepage.scss';
@@ -12,12 +13,11 @@ const HomePage = memo(() => {
     console.log('HomePage just rendered!')
 
     useEffect(() => {
-        fetch('http://localhost:5000/contacts/paginated')
-            .then(res => res.json())
-            .then(contacts => {
+        axios.get('http://localhost:5000/contacts/paginated')
+            .then(resp => {
                 setContacts(prevState => ({
                     ...prevState,
-                    contactsInfo: contacts
+                    contactsInfo: resp.data
                 }));
             })
     }, []);
