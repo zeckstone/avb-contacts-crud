@@ -1,3 +1,4 @@
+import React, { memo } from 'react'
 import './App.css';
 import HomePage from './pages/homepage/homepage.component';
 
@@ -9,4 +10,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);

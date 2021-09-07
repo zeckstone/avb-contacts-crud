@@ -1,0 +1,1 @@
+export const allContacts = state => state.appReducer.contacts;

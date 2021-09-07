@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React, { memo } from 'react';
 import './contact-display-bar.scss';
 import ContactItem from '../contact-item/contact-item.component';
-import { mockData } from '../../mockData/mockData';
 import AddItemButton from '../custom-buttons/add-item-button/add-item-button.component';
 
-const ContactDisplayBar = () => {
-    const [contacts, setContacts] = useState({ currentContact: '', contacts: mockData })
+const ContactDisplayBar = memo(({ contacts }) => {
     const handleOnClick = id => {
         console.log(id);
     };
@@ -15,7 +13,7 @@ const ContactDisplayBar = () => {
             <div className='heading'>Contacts <AddItemButton name='contacts-add-item' /></div>
             <div className='contact-display-container'>
                 {
-                    contacts.contacts.map(contact => 
+                    contacts.map(contact => 
                         <ContactItem 
                             key={contact._id} 
                             contact={contact}
@@ -26,6 +24,6 @@ const ContactDisplayBar = () => {
             </div>
         </div>
     );
-}
+});
 
 export default ContactDisplayBar;
