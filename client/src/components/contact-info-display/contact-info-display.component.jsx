@@ -79,10 +79,15 @@ const ContactInfoDisplay =  memo(() => {
                 return;
             }
 
+            const _firstInitial = firstName[0].toUpperCase();
+            const _firstSlice = firstName.slice(1);
+            const _lastInitial = lastName[0].toUpperCase();
+            const _lastSlice = lastName.slice(1);
+
            await axios.post(`http://localhost:5000/contacts`, {
                 type: 'CREATE_CONTACT',
-                firstName,
-                lastName,
+                firstName: `${_firstInitial.trim()}${_firstSlice.trim()}`,
+                lastName: `${_lastInitial.trim()}${_lastSlice.trim()}`,
                 emails: newEmail && [newEmail]
             })
             .then(resp => {
