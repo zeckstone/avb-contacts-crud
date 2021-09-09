@@ -66,7 +66,7 @@ const ContactInfoDisplay =  memo(() => {
                 emails: emailsToUse
             }
 
-          await axios.put(`http://localhost:5000/contacts/${selectedContactObj._id}`, updateObject)
+          await axios.put(`${process.env.REACT_APP_BASEURL}${selectedContactObj._id}`, updateObject)
                 .then(resp => {
                     console.log(resp.data);
                     resp.data.response.acknowledged && alert('Contact Updated!');
@@ -84,7 +84,7 @@ const ContactInfoDisplay =  memo(() => {
             const _lastInitial = lastName[0].toUpperCase();
             const _lastSlice = lastName.slice(1);
 
-           await axios.post(`http://localhost:5000/contacts`, {
+           await axios.post(`${process.env.REACT_APP_BASEURL}`, {
                 type: 'CREATE_CONTACT',
                 firstName: `${_firstInitial.trim()}${_firstSlice.trim()}`,
                 lastName: `${_lastInitial.trim()}${_lastSlice.trim()}`,
@@ -103,7 +103,7 @@ const ContactInfoDisplay =  memo(() => {
         e.preventDefault();
 
         if (isSelected) {
-          await  axios.delete(`http://localhost:5000/contacts/${selectedContactObj._id}`)
+          await  axios.delete(`${process.env.REACT_APP_BASEURL}${selectedContactObj._id}`)
                 .then(resp => {
                     resp.data.acknowledged && alert('Contact Deleted!');
                 });

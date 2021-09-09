@@ -15,7 +15,7 @@ const HomePage = memo(() => {
     const { contactsInfo } = contacts;
 
     useEffect(() => {
-        axios.get('http://localhost:5000/contacts/paginated')
+        axios.get(process.env.REACT_APP_GET_PAGINATED_CONTACTS)
             .then(resp => {
                 setContacts(prevState => ({
                     ...prevState,

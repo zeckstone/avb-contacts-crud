@@ -1,6 +1,8 @@
-import React, { memo } from 'react'
+import React, { memo } from 'react';
 import './App.css';
 import HomePage from './pages/homepage/homepage.component';
+import { config } from 'dotenv';
+config();
 
 function App() {
   return (
