@@ -8,3 +8,4 @@ export const selectEmailInputToggle = state => state.appReducer.showEmailInput;
 export const isSelected = state => state.appReducer.toggleSelection;
 export const isSelectedContact = state => state.appReducer.isSelectedContact;
 export const updateAppInfo = state => state.appReducer.updateAppContacts;
+export const hasNewEmail = state => state.appReducer.hasNewEmail;

@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFirstName, selectlastName, selectContactEmails, isSelectedContact, selectNewEmail, selectContact } from '../../redux/selectors/selectors';
+import { hasNewEmail, selectFirstName, selectlastName, selectContactEmails, isSelectedContact, selectNewEmail, selectContact } from '../../redux/selectors/selectors';
 import { getInitialState, resetForm, setFirstName, setLastName, updateAppContacts } from '../../redux/actions/creators/creators';
 import CustomInput from '../custom-input/custom-input.component';
 import CustomButton from '../custom-buttons/custom-button.component';
 import EmailListComponent from '../email-list-component/email-list.component';
+import { contactInfoValidator } from '../../utils/utils';
 
 const ContactInfoDisplay =  memo(() => {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const ContactInfoDisplay =  memo(() => {
     const isSelected = useSelector(isSelectedContact);
     const newEmail = useSelector(selectNewEmail);
     const selectedContactObj = useSelector(selectContact);
+    const _hasNewEmail = useSelector(hasNewEmail);
 
     const handleFirstNameInput = (e) => {
         e.preventDefault();
@@ -39,6 +41,14 @@ const ContactInfoDisplay =  memo(() => {
 
         let emailsToUse;
 
+        if (_hasNewEmail) {
+            if (!contactInfoValidator(firstName, lastName, newEmail)) {
+                alert('Ensure name fields are two or more characters long and email address is valid!');
+
+                return;
+            }
+        }
+
         if (isSelected) {
             if (emails && Array.isArray(emails) && newEmail && (emails.indexOf(newEmail) === -1)) {
                 emailsToUse = [...emails, newEmail];
@@ -56,13 +66,19 @@ const ContactInfoDisplay =  memo(() => {
                 emails: emailsToUse
             }
 
-          await  axios.put(`http://localhost:5000/contacts/${selectedContactObj._id}`, updateObject)
+          await axios.put(`http://localhost:5000/contacts/${selectedContactObj._id}`, updateObject)
                 .then(resp => {
                     console.log(resp.data);
                     resp.data.response.acknowledged && alert('Contact Updated!');
                 });
 
         } else {
+            if (!contactInfoValidator(firstName, lastName, newEmail)) {
+                alert('Ensure name fields are two or more characters long and email address is valid!');
+
+                return;
+            }
+
            await axios.post(`http://localhost:5000/contacts`, {
                 type: 'CREATE_CONTACT',
                 firstName,
@@ -70,9 +86,26 @@ const ContactInfoDisplay =  memo(() => {
                 emails: newEmail && [newEmail]
             })
             .then(resp => {
-                console.log(resp.data);
                 resp.data.acknowledged && alert('Contact Added!');
             });
+        }
+
+        dispatch(getInitialState());
+        dispatch(updateAppContacts());
+    };
+
+    const deleteContact = async e => {
+        e.preventDefault();
+
+        if (isSelected) {
+          await  axios.delete(`http://localhost:5000/contacts/${selectedContactObj._id}`)
+                .then(resp => {
+                    resp.data.acknowledged && alert('Contact Deleted!');
+                });
+        } else {
+            alert('Nothing to Delete!');
+
+            return;
         }
 
         dispatch(getInitialState());
@@ -85,7 +118,7 @@ const ContactInfoDisplay =  memo(() => {
                 <CustomInput name={firstName} handleChange={handleFirstNameInput} isVisible={true} label='First Name' customClass='first-name'/>
                 <CustomInput name={lastName} handleChange={handlelastNameInput} isVisible={true} label='Last Name' customClass='last-name'/>
                 <EmailListComponent emails={emails} />
-                <CustomButton label='Delete' />
+                <CustomButton onClick={deleteContact} label='Delete' />
                 <CustomButton onClick={cancelNewContact} label='Cancel' />
                 <CustomButton onClick={createOrUpdateNewContact} label='Save' />
             </div>

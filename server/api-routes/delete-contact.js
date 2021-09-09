@@ -2,15 +2,12 @@ const { Router } = require('express');
 const { manipulateCollection } = require('../utils/db-utils');
 const router = Router();
 
-router.get('/contacts/:contactId', async (req, res) => {
+router.delete('/contacts/:contactId', async (req, res) => {
     const { contactId } = req.params;
-    const { contactInfo } = req.body;
-
     const response = await manipulateCollection({
-        type: contactInfo.type,
+        type: 'DELETE_CONTACT',
         payload: {
-            contactInfo,
-            contactId
+            contactId,
         }
     });
     

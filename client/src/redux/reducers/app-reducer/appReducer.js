@@ -10,6 +10,7 @@ const INITIAL_STATE = {
     firstNameInput: '',
     lastNameInput: '',
     emailInput: '',
+    hasNewEmail: false,
     selectedContactEmails: null,
     isSelectedContact: false,
     updateAppContacts: false,
@@ -46,7 +47,8 @@ const appReducer = (state = INITIAL_STATE, action) => {
         case actionTypes.SET_EMAIL:
             return {
                 ...state,
-                emailInput: action.payload
+                emailInput: action.payload,
+                hasNewEmail: true
             };
         case actionTypes.SELECT_CONTACT:
             return {
@@ -92,7 +94,8 @@ const appReducer = (state = INITIAL_STATE, action) => {
             lastNameInput: '',
             emailInput: '',
             selectedContactEmails: null,
-            isSelectedContact: false
+            isSelectedContact: false,
+            hasNewEmail: false
         };
         case actionTypes.FETCH_ALL_CONTACTS:
             return {

@@ -82,8 +82,7 @@ const deleteEmail = async (payload) => {
       const contact = await collection.find({ _id: payload.id }).toArray();
 
       const contactEmails = contact[0].emails;
-      const emailToDeleteIndex = contactEmails.indexOf(payload.email);
-      const updatedEmailList = contactEmails.splice(emailToDeleteIndex, 1);
+      const updatedEmailList = contactEmails.filter(email => email !== payload.email);
 
       const response = await collection.updateOne({ _id: payload.id }, { $set: { emails: updatedEmailList } });
       
@@ -185,7 +184,7 @@ const manipulateCollection = async (actionObject) => {
     switch (actionObject.type) {
         case contactDataActions.DELETE_CONTACT:
             {
-                result = await deleteContact(actionObject.payload.id);
+                result = await deleteContact(actionObject.payload.contactId);
                 return result;
             };
         case contactDataActions.UPDATE_NAME:
