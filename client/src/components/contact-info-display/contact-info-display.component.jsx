@@ -6,7 +6,7 @@ import { getInitialState, resetForm, setFirstName, setLastName, updateAppContact
 import CustomInput from '../custom-input/custom-input.component';
 import CustomButton from '../custom-buttons/custom-button.component';
 import EmailListComponent from '../email-list-component/email-list.component';
-import { contactInfoValidator } from '../../utils/utils';
+import { contactInfoValidator, firstAndLastNamesValidator } from '../../utils/utils';
 
 const ContactInfoDisplay =  memo(() => {
     const dispatch = useDispatch();
@@ -73,8 +73,8 @@ const ContactInfoDisplay =  memo(() => {
                 });
 
         } else {
-            if (!contactInfoValidator(firstName, lastName, newEmail)) {
-                alert('Ensure name fields are two or more characters long and email address is valid!');
+            if (!firstAndLastNamesValidator(firstName, lastName)) {
+                alert('Ensure name fields are two or more characters long!');
 
                 return;
             }

@@ -19,3 +19,17 @@ export const contactInfoValidator = (firstName, lastName, email) => {
 
     return isValidInput;
 }
+
+export const firstAndLastNamesValidator = (firstName, lastName) => {
+    const firstNameTest = /([A-Za-z]){2,50}/i;
+    const lastNameTest = /[A-Za-z]{2,50}/i;
+    let isValidInput;
+
+    if (firstNameTest.test(firstName) && lastNameTest.test(lastName)) {
+        isValidInput = true;
+    } else {
+        isValidInput = false;
+    }
+
+    return isValidInput;
+}
