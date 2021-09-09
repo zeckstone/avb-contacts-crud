@@ -1,1 +1,10 @@
 export const allContacts = state => state.appReducer.contacts;
+export const selectContact = state => state.appReducer.selectedContact;
+export const selectFirstName = state => state.appReducer.firstNameInput;
+export const selectlastName = state => state.appReducer.lastNameInput;
+export const selectContactEmails = state => state.appReducer.selectedContactEmails;
+export const selectNewEmail = state => state.appReducer.emailInput;
+export const selectEmailInputToggle = state => state.appReducer.showEmailInput;
+export const isSelected = state => state.appReducer.toggleSelection;
+export const isSelectedContact = state => state.appReducer.isSelectedContact;
+export const updateAppInfo = state => state.appReducer.updateAppContacts;

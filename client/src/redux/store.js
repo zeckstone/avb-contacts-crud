@@ -9,6 +9,7 @@ const myLogger = store => next => action => {
     console.log('%cnewState:', 'color:lime;', store.getState());
 };
 
+
 const middlewares = [];
 
 if (process.env.NODE_ENV === 'development') {

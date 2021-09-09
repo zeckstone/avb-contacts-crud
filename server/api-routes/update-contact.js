@@ -2,15 +2,11 @@ const { Router } = require('express');
 const { manipulateCollection } = require('../utils/db-utils');
 const router = Router();
 
-router.get('/contacts/:contactId', async (req, res) => {
-    const { contactId } = req.params;
-    const { contactInfo } = req.body;
-
+router.put('/contacts/:contactId', async (req, res) => {
     const response = await manipulateCollection({
-        type: contactInfo.type,
+        type: req.body.type,
         payload: {
-            contactInfo,
-            contactId
+            ...req.body,
         }
     });
     

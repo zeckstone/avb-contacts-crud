@@ -1,16 +1,18 @@
 import React, { useEffect, useState, memo } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-// import { getAllContacts } from '../../redux/actions/creators/creators';
-// import { allContacts } from '../../redux/selectors/selectors';
 import './homepage.scss';
 import ContactDisplayBar from '../../components/contact-display-bar/contact-display-bar.component';
 import ContactInfoDisplay from '../../components/contact-info-display/contact-info-display.component';
+import { getAllContacts } from '../../redux/actions/creators/creators';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateAppInfo } from '../../redux/selectors/selectors';
 
 const HomePage = memo(() => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const updateApp = useSelector(updateAppInfo)
+
     const [contacts, setContacts] = useState({ contactsInfo: [] });
-    console.log('HomePage just rendered!')
+    const { contactsInfo } = contacts;
 
     useEffect(() => {
         axios.get('http://localhost:5000/contacts/paginated')
@@ -20,25 +22,14 @@ const HomePage = memo(() => {
                     contactsInfo: resp.data
                 }));
             })
-    }, []);
+    }, [updateApp]);
 
-    // const contacts = useSelector(allContacts);
-    const { contactsInfo } = contacts;
-    const emails = contactsInfo.reduce((acc, currentItem) => {
-        const emailObject = {
-            email: currentItem.emails[0],
-            id: currentItem._id
-        };
-
-        acc.push(emailObject);
-        
-        return acc;
-    }, []);
+    (() => dispatch(getAllContacts(contactsInfo)))();
 
     return (
         <div className='homepage'>
             <ContactDisplayBar contacts={contactsInfo} />
-            <ContactInfoDisplay emails={emails}/>
+            <ContactInfoDisplay />
         </div>
     );
 });

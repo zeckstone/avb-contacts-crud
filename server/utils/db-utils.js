@@ -145,6 +145,40 @@ const updateName = async (payload) => {
     }
 };
 
+const updateContact = async (payload) => {
+  try {
+    await client.connect();
+
+    const db = client.db(dbConfig.dbName);
+    const collection = db.collection(dbConfig.collectionName);
+
+    let response;
+
+    await collection.updateOne({
+       _id: payload.id }, 
+       { $set: { 
+         firstName: payload.firstName,
+         lastName: payload.lastName,
+         emails: [...payload.emails]
+       }
+      })
+      .then(res => {
+        response = res;
+      });
+
+    const updatedInfo = {
+      response: {acknowledged: response.acknowledged, modifiedCount: response.modifiedCount},
+      updatedItem: await collection.find({ _id: payload.id }).toArray()
+    };
+
+    return updatedInfo;
+  } catch (err) {
+    return new Error(err.message);
+  } finally {
+    await client.close();
+  }
+};
+
 const manipulateCollection = async (actionObject) => {
     let result;
 
@@ -167,6 +201,11 @@ const manipulateCollection = async (actionObject) => {
         case contactDataActions.DELETE_EMAIL:
             {
                 result = await deleteEmail(actionObject.payload);
+                return result;
+            };
+          case contactDataActions.UPDATE_CONTACT:
+            {
+                result = await updateContact(actionObject.payload);
                 return result;
             };
         default:

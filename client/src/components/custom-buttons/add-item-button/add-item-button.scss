@@ -23,6 +23,14 @@
     line-height: 22px;
 }
 
-.contacts-add-item {
-
+.remove-item-button {
+    position: absolute;
+    width: 30px;
+    height: auto;
+    color: #FFFF;
+    background-color: #FF5757;
+    border: 1px solid #FF5757;
+    border-radius: 3rem;
+    font-size: 25px;
+    padding: 0;
 }

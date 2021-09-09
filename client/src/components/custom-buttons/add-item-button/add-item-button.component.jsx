@@ -1,10 +1,10 @@
 import React from 'react';
 import './add-item-button.scss';
 
-const AddItemButton = ({ label, name, handleOnClick }) => (
+const AddItemButton = ({ label, name, handleOnClick, addItem }) => (
     <div>
-        <button className='add-item-button' onClick={() => handleOnClick}>
-            +
+        <button className={`${addItem ? 'remove-item-button' : 'add-item-button'}`} onClick={e => handleOnClick(e, addItem)}>
+           {addItem ? '-' : '+'} 
         </button> {label && <span className={`${name} add-item-label`} >{label}</span>}
     </div>
 );

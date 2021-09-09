@@ -19,7 +19,8 @@ const contactDataActions = {
     DELETE_CONTACT: 'DELETE_CONTACT',
     DELETE_EMAIL: 'DELETE_EMAIL',
     ADD_EMAIL: 'ADD_EMAIL',
-    UPDATE_NAME: 'UPDATE_NAME'
+    UPDATE_NAME: 'UPDATE_NAME',
+    UPDATE_CONTACT: 'UPDATE_CONTACT'
 }
 
 module.exports = {
