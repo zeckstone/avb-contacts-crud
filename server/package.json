@@ -1,5 +1,5 @@
 {
-  "name": "contacts-server",
+  "name": "avb-contacts-crud-api",
   "version": "1.0.0",
   "description": "manipulates data for contacts",
   "main": "server.js",
@@ -18,5 +18,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
+  },
+  "engines": {
+    "node": "16.6.1"
   }
 }
